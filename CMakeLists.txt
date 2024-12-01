@@ -7,24 +7,26 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_compile_definitions (XD3_MAIN=0)
-add_compile_definitions (XD3_DEBUG=0)
-add_compile_definitions (XD3_USE_LARGEFILE64=1)
-add_compile_definitions (REGRESSION_TEST=0)
-add_compile_definitions (SECONDARY_DJW=1)
-add_compile_definitions (SECONDARY_FGK=1)
-add_compile_definitions (SIZEOF_SIZE_T=8)
-add_compile_definitions (SIZEOF_UNSIGNED_LONG_LONG=8)
-add_compile_definitions (SECONDARY_LZMA=0)
-if (WIN32)
-    add_compile_definitions (XD3_WIN32=1)
-endif ()
-add_compile_definitions (EXTERNAL_COMPRESSION=0)
-add_compile_definitions (SHELL_TESTS=0)
-add_compile_definitions (LZMA_API_STATIC)
-
 project(xdelta)
 
 add_library(xdelta
     xdelta3/xdelta3.c
 )
+
+target_include_directories(xdelta PUBLIC xdelta3)
+
+target_compile_definitions (xdelta PUBLIC XD3_MAIN=0)
+target_compile_definitions (xdelta PUBLIC XD3_DEBUG=0)
+target_compile_definitions (xdelta PUBLIC XD3_USE_LARGEFILE64=1)
+target_compile_definitions (xdelta PUBLIC REGRESSION_TEST=0)
+target_compile_definitions (xdelta PUBLIC SECONDARY_DJW=1)
+target_compile_definitions (xdelta PUBLIC SECONDARY_FGK=1)
+target_compile_definitions (xdelta PUBLIC SIZEOF_SIZE_T=8)
+target_compile_definitions (xdelta PUBLIC SIZEOF_UNSIGNED_LONG_LONG=8)
+target_compile_definitions (xdelta PUBLIC SECONDARY_LZMA=0)
+if (WIN32)
+    target_compile_definitions (xdelta PUBLIC XD3_WIN32=1)
+endif ()
+target_compile_definitions (xdelta PUBLIC EXTERNAL_COMPRESSION=0)
+target_compile_definitions (xdelta PUBLIC SHELL_TESTS=0)
+target_compile_definitions (xdelta PUBLIC LZMA_API_STATIC)
